@@ -31,6 +31,7 @@ def submit_survey():
         submission = SurveySubmission(**payload)
     except ValidationError as ve:
         return jsonify({"error": "validation_error", "detail": ve.errors()}), 422
+    
     email_norm = submission.email.strip().lower()
     hashed_email = sha256_hex(email_norm)
     hashed_age = sha256_hex(str(submission.age))
@@ -45,6 +46,10 @@ def submit_survey():
         comments = submission.comments,
         user_agent = submission.user_agent,
 
+        hashed_email = hashed_email,
+        hashed_age = hashed_age,
+        submission_id = submission_id,
+        
         received_at=datetime.now(timezone.utc),
         ip=request.headers.get("X-Forwarded-For", request.remote_addr or "")
     )

@@ -28,8 +28,8 @@ class StoredSurveyRecord(BaseModel):
     name: str
     consent: bool
     rating: int
-    comments: Optional[str]
-    user_agent:Optional[str]
+    comments: Optional[str] = None
+    user_agent: Optional[str] = None
 
     hashed_email: str
     hashed_age: str
