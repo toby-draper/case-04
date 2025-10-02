@@ -14,7 +14,7 @@ class SurveySubmission(BaseModel):
   
 
     @validator("comments")
-    def _strip_comments(cls, v):
+    def _strip_comments(cls, v): 
         return v.strip() if isinstance(v, str) else v
 
     @validator("consent")
